@@ -21,3 +21,4 @@ io.sockets.on 'connection', (socket) ->
         headers: res.headers
 
 app.listen process.env['PORT'] or 9000
+console.log 'listening on',  process.env['PORT'] or 9000
