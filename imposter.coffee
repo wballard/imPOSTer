@@ -6,6 +6,8 @@ request = require('request')
 WebSocketServer = require('ws').Server
 wss = new WebSocketServer port: process.env['PORT'] or 9000
 
+KEEP_ALIVE = 1000 * Number(process.env['KEEP_ALIVE'] or '30')
+
 wss.on 'connection', (socket) ->
   socket.on 'message', (req) ->
     try
@@ -27,11 +29,11 @@ wss.on 'connection', (socket) ->
   #to just remove that timeout -- so keepalives!
   keepalive = ->
     try
-      socket.send ''
-      setTimeout keepalive, 30 * 1000
+      socket.send JSON.stringify({})
+      setTimeout keepalive, KEEP_ALIVE
     catch error
       console.log error
-  keepalive
+  keepalive()
 
 wss.on 'error', (error) ->
   console.log error
