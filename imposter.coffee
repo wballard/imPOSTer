@@ -5,7 +5,7 @@ pkg = require(path.join(__dirname, "./package.json"))
 request = require('request')
 app = require('http').createServer(handler)
 io = require('socket.io').listen(app)
-io.set('log level', 1)
+io.set('log level', 2)
 io.set('transports', ['websocket'])
 
 handler = (req, res) ->
