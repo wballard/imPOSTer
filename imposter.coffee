@@ -3,22 +3,25 @@
 path = require('path')
 pkg = require(path.join(__dirname, "./package.json"))
 request = require('request')
-app = require('http').createServer(handler)
-io = require('socket.io').listen(app)
-io.set('log level', 2)
-io.set('transports', ['websocket'])
+WebSocketServer = require('ws').Server
+wss = new WebSocketServer port: process.env['PORT'] or 9000
 
-handler = (req, res) ->
-  res.writeHead(200)
-  res.end()
+wss.on 'connection', (socket) ->
+  socket.on 'message', (req) ->
+    try
+      req = JSON.parse(req)
+      if req.verb
+        request[req.verb] req.url, (err, res, body) ->
+          if err
+            req.error = err
+          else
+            req.text = body
+            req.statusCode = res.statusCode
+            req.responseHeaders = res.headers
+          if process.env['DEBUG']
+            console.log req
+          socket.send JSON.stringify(req)
+    catch error
+      console.log error
 
-io.sockets.on 'connection', (socket) ->
-  socket.on 'get', (req, callback) ->
-    request.get req.url, (err, res, body) ->
-      callback err,
-        text: body
-        statusCode: res.statusCode
-        headers: res.headers
-
-app.listen process.env['PORT'] or 9000
-console.log 'listening on',  process.env['PORT'] or 9000
+console.log 'listening on', process.env['PORT'] or 9000

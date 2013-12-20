@@ -10,8 +10,8 @@
   "author": "Will Ballard",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "socket.io": "~0.9.16",
     "coffee-script": "~1.6.3",
-    "request": "~2.30.0"
+    "request": "~2.30.0",
+    "ws": "~0.4.31"
   }
 }
