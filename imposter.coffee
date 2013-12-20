@@ -24,4 +24,7 @@ wss.on 'connection', (socket) ->
     catch error
       console.log error
 
+wss.on 'error', (error) ->
+  console.log error
+
 console.log 'listening on', process.env['PORT'] or 9000
