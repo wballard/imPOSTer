@@ -1,0 +1,17 @@
+{
+  "name": "imPOSTer",
+  "version": "0.0.0",
+  "description": "Stand in for REST with WebSockets and save your self connection and DNS latency.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Will Ballard",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "socket.io": "~0.9.16",
+    "coffee-script": "~1.6.3",
+    "request": "~2.30.0"
+  }
+}
