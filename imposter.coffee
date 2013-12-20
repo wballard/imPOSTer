@@ -23,6 +23,15 @@ wss.on 'connection', (socket) ->
           socket.send JSON.stringify(req)
     catch error
       console.log error
+  #nginx will kill you off after 60s by default, and it doesn't seem smart
+  #to just remove that timeout -- so keepalives!
+  keepalive = ->
+    try
+      socket.send ''
+      setTimeout keepalive, 30 * 1000
+    catch error
+      console.log error
+  keepalive
 
 wss.on 'error', (error) ->
   console.log error
