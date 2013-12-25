@@ -29,8 +29,9 @@ wss.on 'connection', (socket) ->
   #to just remove that timeout -- so keepalives!
   keepalive = ->
     try
-      socket.send JSON.stringify({})
-      setTimeout keepalive, KEEP_ALIVE
+      if socket.readyState is 1
+        socket.send JSON.stringify({})
+        setTimeout keepalive, KEEP_ALIVE
     catch error
       console.log error
   keepalive()
