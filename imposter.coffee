@@ -5,6 +5,7 @@ pkg = require(path.join(__dirname, "./package.json"))
 request = require('request')
 WebSocketServer = require('ws').Server
 wss = new WebSocketServer port: process.env['PORT'] or 9000
+filter = require('./filter')
 
 KEEP_ALIVE = 1000 * Number(process.env['KEEP_ALIVE'] or '30')
 
@@ -22,11 +23,11 @@ wss.on 'connection', (socket) ->
             req.responseHeaders = res.headers
           if process.env['DEBUG']
             console.log req
-          socket.send JSON.stringify(req), (err) ->
+          socket.send filter(JSON.stringify(req)), (err) ->
             console.log err if err
       #keep alive ping
       if req.ping
-        socket.send JSON.stringify(pong: true), (err) ->
+        socket.send filter(JSON.stringify(pong: true)), (err) ->
           console.log err if err
     catch error
       console.log error
