@@ -14,7 +14,8 @@ wss.on 'connection', (socket) ->
     try
       req = JSON.parse(req)
       if req.verb
-        request[req.verb] req.url, (err, res, body) ->
+        #pass along the request itself as the options hash
+        request[req.verb] req.url, req, (err, res, body) ->
           if err
             req.error = err
           else
