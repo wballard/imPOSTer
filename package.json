@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "Stand in for REST with WebSockets and save your self connection and DNS latency.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon imposter.coffee"
   },
   "author": "Will Ballard",
