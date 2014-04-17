@@ -1,5 +1,5 @@
 {
-  "name": "imPOSTer",
+  "name": "imposter",
   "version": "0.0.1",
   "description": "Stand in for REST with WebSockets and save your self connection and DNS latency.",
   "scripts": {
