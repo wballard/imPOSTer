@@ -1,16 +1,15 @@
 {
   "name": "imposter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Stand in for REST with WebSockets and save your self connection and DNS latency.",
   "scripts": {
-    "start": "nodemon imposter.coffee"
+    "start": "coffee imposter.coffee"
   },
   "author": "Will Ballard",
   "license": "BSD-2-Clause",
   "dependencies": {
     "coffee-script": "~1.6.3",
     "request": "~2.30.0",
-    "ws": "~0.4.31",
-    "nodemon": "~1.0.14"
+    "ws": "~0.4.31"
   }
 }
